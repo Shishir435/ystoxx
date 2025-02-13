@@ -11,14 +11,13 @@ const Page = () => {
     if(!userId) redirect("/sign-in")
     const handleClick= async ()=>{
         const user= await axios.post("/api/user",{userId})
-        setResp(JSON.stringify(user))
+        setResp(user.data.data.balance)
         console.log(user)
     }
 
   return (
     <div>
-      Click  <Button onClick={handleClick}>here</Button> to get your credits
-    {resp}
+      Click  <Button onClick={handleClick}>here</Button> to get your credits: {" "}{resp}
     </div>
   )
 }
