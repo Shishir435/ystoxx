@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: ystoxx
+      POSTGRES_PASSWORD: ystoxx
+      POSTGRES_DB: ystoxx
+    ports:
+      - "5432:5432"
+# postgresql://ystoxx:ystoxx@localhost:5432/ystoxx

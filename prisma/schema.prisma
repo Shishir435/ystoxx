@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TransactionAction {
+  BUY
+  SELL
+}
+
+model User {
+  id          String        @id @default(cuid())
+  clerkId     String        @unique
+  balance     Int           @default(50000)
+  createdAt   DateTime      @default(now())
+  transactions Transaction[]
+}
+
+model NFT {
+  id                String         @id @default(cuid())
+  name              String
+  description       String
+  website           String
+  image             String
+  price             String
+  currentlySelling  Boolean
+  address           String
+  quantity          Int            @default(100)
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          String             @id @default(cuid())
+  userId      String
+  user        User               @relation(fields: [userId], references: [id])
+  nftId       String
+  nft         NFT                @relation(fields: [nftId], references: [id])
+  quantity    Int                @default(1)
+  createdAt   DateTime           @default(now())
+  action      TransactionAction  
+}
