@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "yt3.ggpht.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "yt3.googleusercontent.com",
+        pathname: "/**",
+      },
+    ],
+  },
+};
 
 export default nextConfig;
